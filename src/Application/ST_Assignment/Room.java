@@ -6,22 +6,26 @@ public class Room {
     private int vip;
     private int deluxe;
     private int standard;
+    private Connection connection;
+    private AppManager app=new AppManager();
 
     public Room() {
        checkRoom();
     }
 
-    private void checkRoom() {
-        try (Connection connection = dbConnector.getConnection()) {
-            vip = fetchRoomCount(connection, "VIP");
-            deluxe = fetchRoomCount(connection, "Deluxe");
-            standard = fetchRoomCount(connection, "Standard");
+   private void checkRoom() {
+        app.initializeConnection(); 
+        try {
+            vip = fetchRoomCount("VIP");
+            deluxe = fetchRoomCount("Deluxe");
+            standard = fetchRoomCount("Standard");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private int fetchRoomCount(Connection connection, String roomType) throws SQLException {
+
+    private int fetchRoomCount(String roomType) throws SQLException {
         String query = "SELECT COUNT(*) FROM room WHERE roomType = ? AND roomStatus = 'available'";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, roomType);
