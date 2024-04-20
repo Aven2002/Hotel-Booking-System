@@ -25,7 +25,7 @@ public class AppManager {
 
     public void welcomePage() {
         System.out.println("\n@=================================@");
-        System.out.println("| Welcome to Sport Store System   |");
+        System.out.println("| Welcome to Hotel Booking System |");
         System.out.println("|=================================|");
         System.out.println("|          1. Log in              |");
         System.out.println("|          2. Sign up             |");
