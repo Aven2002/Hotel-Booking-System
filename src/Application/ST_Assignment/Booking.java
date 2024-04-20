@@ -21,6 +21,9 @@ public class Booking {
 		this.userID=userID;
 		this.roomID=roomID;
 	}
+	public Booking(){
+		
+	}
 	
 	public void setBooking(Booking booking) {
 	
