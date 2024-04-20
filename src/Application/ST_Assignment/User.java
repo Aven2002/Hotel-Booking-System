@@ -1,22 +1,22 @@
 package ST_Assignment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.*;
+import java.util.*;
 
 public class User {
+	
 	String name;
 	String member_type;
 	Boolean excl_reward;
 	
+	private int userID;
     private String username;
     private String phoneNum;
     private String password;
     private String email;
     private String fullName;
     private String role;
+    
 	AppManager app = new AppManager();
 	private Scanner scanner = new Scanner(System.in);
     private Connection connection;
@@ -28,6 +28,7 @@ public class User {
 	
 	// Login
     public void loginPhase() {
+    	
         System.out.println("\n+=============================+");
         System.out.println("║           Login             ║ ");
         System.out.println("+=============================+");
@@ -156,6 +157,20 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getUserID(String username) {
+        String query = "SELECT userID FROM user_account WHERE username = ? ";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userID = resultSet.getInt("userID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userID;
     }
 	
 	public boolean isValidFullName(String fullName) {
