@@ -7,14 +7,15 @@ public class Room {
     private int deluxe;
     private int standard;
     private Connection connection;
-    private AppManager app=new AppManager();
+    private AppManager app;
 
-    public Room() {
-       checkRoom();
+    public Room(Connection connection) {
+        this.connection = connection;
+        this.app = new AppManager();
+        checkRoom();
     }
 
-   private void checkRoom() {
-        app.initializeConnection(); 
+    public void checkRoom() {
         try {
             vip = fetchRoomCount("VIP");
             deluxe = fetchRoomCount("Deluxe");
@@ -23,7 +24,6 @@ public class Room {
             e.printStackTrace();
         }
     }
-
 
     private int fetchRoomCount(String roomType) throws SQLException {
         String query = "SELECT COUNT(*) FROM room WHERE roomType = ? AND roomStatus = 'available'";
@@ -35,7 +35,7 @@ public class Room {
                 }
             }
         }
-        return 0; 
+        return 0;
     }
 
     public void displayAvailableRooms(String memberLevel) {
@@ -53,7 +53,15 @@ public class Room {
     }
 
     public static void main(String[] args) {
-        Room room = new Room();
-        room.displayAvailableRooms("VIP");
+        // Initialize database connection
+        try {
+            Connection connection = dbConnector.getConnection();
+            Room room = new Room(connection);
+            room.displayAvailableRooms("VIP");
+            // Close the connection when done
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
