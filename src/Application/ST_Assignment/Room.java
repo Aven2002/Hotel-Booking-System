@@ -1,43 +1,55 @@
 package ST_Assignment;
-import java.util.*;
+
 import java.sql.*;
 
 public class Room {
-	private Scanner scanner =new Scanner(System.in);
-	private final String VIP_ROOM_QUERY = "SELECT COUNT(*) FROM room WHERE roomType = 'VIP' AND roomStatus = 'available'";
-    private final String DELUXE_ROOM_QUERY = "SELECT COUNT(*) FROM room WHERE roomType = 'Deluxe' AND roomStatus = 'available'";
-    private final String STANDARD_ROOM_QUERY = "SELECT COUNT(*) FROM room WHERE roomType = 'Standard' AND roomStatus = 'available'";
-	
-	public static void main(String[]args) {
-		
-	}
+    private int vip;
+    private int deluxe;
+    private int standard;
 
-	
-    public void checkRoom(String memberLevel) {
+    public Room() {
+       checkRoom();
+    }
+
+    private void checkRoom() {
         try (Connection connection = dbConnector.getConnection()) {
-            int availableRooms = 0;
-            String query = "";
-            switch (memberLevel) {
-                case "VIP":
-                    query = VIP_ROOM_QUERY;
-                    break;
-                case "member":
-                    query = DELUXE_ROOM_QUERY;
-                    break;
-                default:
-                    query = STANDARD_ROOM_QUERY;
-                    break;
-            }
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        availableRooms = resultSet.getInt(1);
-                    }
-                }
-            }
-            System.out.println("Available rooms for " + memberLevel + " level: " + availableRooms);
+            vip = fetchRoomCount(connection, "VIP");
+            deluxe = fetchRoomCount(connection, "Deluxe");
+            standard = fetchRoomCount(connection, "Standard");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private int fetchRoomCount(Connection connection, String roomType) throws SQLException {
+        String query = "SELECT COUNT(*) FROM room WHERE roomType = ? AND roomStatus = 'available'";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, roomType);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        }
+        return 0; 
+    }
+
+    public void displayAvailableRooms(String memberLevel) {
+        switch (memberLevel) {
+            case "VIP":
+                System.out.println("Available VIP rooms: " + vip);
+                break;
+            case "member":
+                System.out.println("Available Deluxe rooms: " + deluxe);
+                break;
+            default:
+                System.out.println("Available Standard rooms: " + standard);
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+        Room room = new Room();
+        room.displayAvailableRooms("VIP");
     }
 }

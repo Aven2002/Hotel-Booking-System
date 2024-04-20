@@ -4,65 +4,61 @@ import java.util.*;
 import java.sql.*;
 
 public class AppManager {
-    private int userID;
-    private String username;
-    private String phoneNum;
-    private String password;
-    private String email;
-    private String fullName;
-    private String role;
-    private Scanner scanner = new Scanner(System.in);
+   
+    private static Scanner scanner = new Scanner(System.in);
     private Connection connection;
     User user = new User();
 
     public static void main(String[] args) {
-        AppManager landing = new AppManager();
-        landing.welcomePage();
+       AppManager app = new AppManager();
+        app.goodbyeMessage();
     }
+
 
     public AppManager() {
         initializeConnection();
     }
 
     public void welcomePage() {
-        System.out.println("\n@=================================@");
-        System.out.println("| Welcome to Hotel Booking System |");
-        System.out.println("|=================================|");
-        System.out.println("|          1. Log in              |");
-        System.out.println("|          2. Sign up             |");
-        System.out.println("|          3. Exit                |");
-        System.out.println("@=================================@");
-        int choice;
-        try {
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    user.loginPhase();
-                    break;
-                case 2:
-                    user.signUpPhase();
-                    break;
-                case 3:
-                    goodbyeMessage();
-                    break;
-                default:
-                    System.out.println("\n╔══════════════════════════════════════════╗");
-                    System.out.println("║     Error Message: Invalid Selection     ║");
-                    System.out.println("╚══════════════════════════════════════════╝");
-                    System.out.println("Please try again ...");
-                    System.out.println("");
-                    welcomePage();
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("\n@=================================@");
+            System.out.println("| Welcome to Hotel Booking System |");
+            System.out.println("|=================================|");
+            System.out.println("|          1. Log in              |");
+            System.out.println("|          2. Sign up             |");
+            System.out.println("|          3. Exit                |");
+            System.out.println("@=================================@");
+            int choice;
+            try {
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        user.loginPhase();
+                        break;
+                    case 2:
+                        user.signUpPhase();
+                        break;
+                    case 3:
+                        goodbyeMessage();
+                        exit = true; // Set exit flag to true to break out of the loop
+                        break;
+                    default:
+                        System.out.println("\n╔══════════════════════════════════════════╗");
+                        System.out.println("║     Error Message: Invalid Selection     ║");
+                        System.out.println("╚══════════════════════════════════════════╝");
+                        System.out.println("Please try again ...");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\n╔══════════════════════════════════════════╗");
+                System.out.println("║    Error Message: Invalid Input Format   ║");
+                System.out.println("╚══════════════════════════════════════════╝");
+                System.out.println("Please enter a valid integer choice (1-3) ...");
+                System.out.println("");
+                scanner.nextLine();
             }
-        } catch (InputMismatchException e) {
-            System.out.println("\n╔══════════════════════════════════════════╗");
-            System.out.println("║    Error Message: Invalid Input Format   ║");
-            System.out.println("╚══════════════════════════════════════════╝");
-            System.out.println("Please enter a valid integer choice (1-3) ...");
-            System.out.println("");
-            scanner.nextLine();
-            welcomePage();
         }
     }
 
@@ -135,22 +131,5 @@ public class AppManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getUserID(String username) {
-        String query = "SELECT userID FROM user_account WHERE username = ? ";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, username);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                userID = resultSet.getInt("userID");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return userID;
-    }
-
-    
-
+    }    
 }

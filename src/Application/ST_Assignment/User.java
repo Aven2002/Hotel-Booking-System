@@ -10,7 +10,7 @@ public class User {
 	String name;
 	String member_type;
 	Boolean excl_reward;
-	
+	private int userID;
     private String username;
     private String phoneNum;
     private String password;
@@ -156,6 +156,20 @@ public class User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getUserID(String username) {
+        String query = "SELECT userID FROM user_account WHERE username = ? ";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                userID = resultSet.getInt("userID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userID;
     }
 	
 	public boolean isValidFullName(String fullName) {
