@@ -106,101 +106,93 @@ public class AppManager {
             System.out.println("\n+-----------------------------+");
             System.out.println("|   Account Registration      |");
             System.out.println("+-----------------------------+");
-            System.out.println("Register a new admin or user account:");
-            role = scanner.nextLine();
-            if (role.equalsIgnoreCase("Admin") || role.equalsIgnoreCase("User")) {
-                System.out.print("Enter your full name (e.g., MACC DING): ");
-                fullName = scanner.nextLine();
-                if (!isValidFullName(fullName)) {
-                    System.out.println("\n╔══════════════════════════════════════════════╗");
-                    System.out.println("║     Error Message: Invalid full name format  ║");
-                    System.out.println("╚══════════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    welcomePage();
-                }
-
-                System.out.print("Enter your phone number (e.g., 0102223333): ");
-                phoneNum = scanner.nextLine();
-                if (!isValidPhoneNumber(phoneNum)) {
-                    System.out.println("\n╔═════════════════════════════════════════════════╗");
-                    System.out.println("║      Error Message: Invalid phone number        ║");
-                    System.out.println("║                                                 ║");
-                    System.out.println("║  Contact number must consist 10 to 15 digits.   ║");
-                    System.out.println("╚═════════════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    welcomePage();
-                }
-
-                System.out.print("Enter your email address (e.g., maccding@outlook.com): ");
-                email = scanner.nextLine();
-                if (!isValidEmail(email)) {
-                    System.out.println("\n╔══════════════════════════════════════════════════╗");
-                    System.out.println("║  Error Message: Invalid email addrerss format    ║");
-                    System.out.println("║                                                  ║");
-                    System.out.println("║  Email address must follow the standard format   ║");
-                    System.out.println("╚══════════════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    welcomePage();
-                }
-
-                System.out.print("Enter your username (e.g., macc2020): ");
-                username = scanner.nextLine();
-                if (!isValidUsername(username)) {
-                    System.out.println(
-                            "\n╔════════════════════════════════════════════════════════════════════════════════════╗");
-                    System.out.println(
-                            "║                       Error Message:  Invalid username format                      ║");
-                    System.out.println(
-                            "║                                                                                    ║");
-                    System.out.println(
-                            "║  Username must consist of alphanumeric characters and have at least 5 characters.  ║");
-                    System.out.println(
-                            "╚════════════════════════════════════════════════════════════════════════════════════╝");
-
-                    System.out.println("Please try again ...\n");
-                    welcomePage();
-                }
-
-                System.out.print("Enter your password: ");
-                password = scanner.nextLine();
-
-                String query = "INSERT INTO user_account (role, username, fullName, password, contactNum, email) VALUES (?, ?, ?, ?, ?, ?)";
-                try (PreparedStatement statement = connection.prepareStatement(query)) {
-
-                    statement.setString(1, role);
-                    statement.setString(2, username);
-                    statement.setString(3, fullName);
-                    statement.setString(4, password);
-                    statement.setString(5, phoneNum);
-                    statement.setString(6, email);
-
-                    int rowsInserted = statement.executeUpdate();
-
-                    if (rowsInserted > 0) {
-                        System.out.println("\n╔══════════════════════════════════════════════╗");
-                        System.out.println("║          Confirmation Message:               ║");
-                        System.out.println("║                                              ║");
-                        System.out.println("║        Account Successfully Created          ║");
-                        System.out.println("║ You can now log in using your credentials    ║");
-                        System.out.println("╚══════════════════════════════════════════════╝");
-                        loginPhase();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    System.out.println("\n╔══════════════════════════════════════════════╗");
-                    System.out.println("║     Error Message: Account Creation Failed   ║");
-                    System.out.println("╚══════════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    displayMenu(role);
-                }
-                connection.close();
-            } else {
-                System.out.println("\n╔═════════════════════════════════════╗");
-                System.out.println("║     Error Message: Invalid Role     ║");
-                System.out.println("╚═════════════════════════════════════╝");
-                System.out.println("Please try again ..............");
+            
+            System.out.print("Enter your full name (e.g., MACC DING): ");
+        	fullName = scanner.nextLine();
+            if (!isValidFullName(fullName)) {
+                System.out.println("\n╔══════════════════════════════════════════════╗");
+                System.out.println("║     Error Message: Invalid full name format  ║");
+                System.out.println("╚══════════════════════════════════════════════╝");
+                System.out.println("Please try again ...\n");
                 welcomePage();
             }
+
+            System.out.print("Enter your phone number (e.g., 0102223333): ");
+            phoneNum = scanner.nextLine();
+            if (!isValidPhoneNumber(phoneNum)) {
+                System.out.println("\n╔═════════════════════════════════════════════════╗");
+                System.out.println("║      Error Message: Invalid phone number        ║");
+                System.out.println("║                                                 ║");
+                System.out.println("║  Contact number must consist 10 to 15 digits.   ║");
+                System.out.println("╚═════════════════════════════════════════════════╝");
+                System.out.println("Please try again ...\n");
+                welcomePage();
+            }
+
+            System.out.print("Enter your email address (e.g., maccding@outlook.com): ");
+            email = scanner.nextLine();
+            if (!isValidEmail(email)) {
+                System.out.println("\n╔══════════════════════════════════════════════════╗");
+                System.out.println("║  Error Message: Invalid email addrerss format    ║");
+                System.out.println("║                                                  ║");
+                System.out.println("║  Email address must follow the standard format   ║");
+                System.out.println("╚══════════════════════════════════════════════════╝");
+                System.out.println("Please try again ...\n");
+                welcomePage();
+            }
+
+            System.out.print("Enter your username (e.g., macc2020): ");
+            username = scanner.nextLine();
+            if (!isValidUsername(username)) {
+                System.out.println(
+                        "\n╔════════════════════════════════════════════════════════════════════════════════════╗");
+                System.out.println(
+                        "║                       Error Message:  Invalid username format                      ║");
+                System.out.println(
+                        "║                                                                                    ║");
+                System.out.println(
+                        "║  Username must consist of alphanumeric characters and have at least 5 characters.  ║");
+                System.out.println(
+                        "╚════════════════════════════════════════════════════════════════════════════════════╝");
+
+                System.out.println("Please try again ...\n");
+                welcomePage();
+            }
+
+            System.out.print("Enter your password: ");
+            password = scanner.nextLine();
+
+            String query = "INSERT INTO user_account (role, username, fullName, password, contactNum, email) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+                statement.setString(1, role);
+                statement.setString(2, username);
+                statement.setString(3, fullName);
+                statement.setString(4, password);
+                statement.setString(5, phoneNum);
+                statement.setString(6, email);
+
+                int rowsInserted = statement.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    System.out.println("\n╔══════════════════════════════════════════════╗");
+                    System.out.println("║          Confirmation Message:               ║");
+                    System.out.println("║                                              ║");
+                    System.out.println("║        Account Successfully Created          ║");
+                    System.out.println("║ You can now log in using your credentials    ║");
+                    System.out.println("╚══════════════════════════════════════════════╝");
+                    loginPhase();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("\n╔══════════════════════════════════════════════╗");
+                System.out.println("║     Error Message: Account Creation Failed   ║");
+                System.out.println("╚══════════════════════════════════════════════╝");
+                System.out.println("Please try again ...\n");
+                displayMenu(role);
+            }
+            connection.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -218,31 +210,21 @@ public class AppManager {
 
     // Menu
     public void displayMenu(String role) {
-        if (role.equalsIgnoreCase("Admin")) {
-            System.out.println("\n@=====================================@");
-            System.out.println("|           << ADMIN MENU >>          |");
-            System.out.println("|=====================================|");
-            System.out.println("|  1. Manage Product                  |");
-            System.out.println("|  2. Manage Order                    |");
-            System.out.println("|  3. Manage Billing Statement        |");
-            System.out.println("|  4. View Sales / Inventory Report   |");
-            System.out.println("|  5. Quit                            |");
-            System.out.println("@=====================================@");
-        } else {
-            System.out.println("\n@====================================@");
-            System.out.println("|         << CUSTOMER MENU >>        |");
-            System.out.println("|====================================|");
-            System.out.println("|  1. Browse Product                 |");
-            System.out.println("|  2. Create Order                   |");
-            System.out.println("|  3. View Billing Statement         |");
-            System.out.println("|  4. Quit                           |");
-            System.out.println("@====================================@");
-        }
+        
+        System.out.println("\n@====================================@");
+        System.out.println("|         << CUSTOMER MENU >>        |");
+        System.out.println("|====================================|");
+        System.out.println("|  1. Browse Product                 |");
+        System.out.println("|  2. Create Order                   |");
+        System.out.println("|  3. View Billing Statement         |");
+        System.out.println("|  4. Quit                           |");
+        System.out.println("@====================================@");
+        
         try {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
-            processChoice(role, choice);
+            processChoice(choice);
         } catch (InputMismatchException e) {
             System.out.println("");
             System.out.println("\n╔══════════════════════════════════════════╗");
@@ -254,61 +236,28 @@ public class AppManager {
         }
     }
 
-    public void processChoice(String role, int choice) {
-        Product product = new Product(connection);
-        Order order = new Order(connection);
-        Billing billing = new Billing(connection);
-        Report report = new Report(connection);
-        if (role.equalsIgnoreCase("Admin")) {
-            switch (choice) {
-                case 1:
-                    product.manageProducts();
-                    break;
-                case 2:
-                    order.manageOrder();
-                    break;
-                case 3:
-                    billing.manageBilling();
-                    break;
-                case 4:
-                    report.reportMenu();
-                    break;
-                case 5:
-                    welcomePage();
-                    break;
-                default:
-                    System.out.println("");
-                    System.out.println("\n╔══════════════════════════════════════════╗");
-                    System.out.println("║     Error Message: Invalid Selection     ║");
-                    System.out.println("╚══════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    displayMenu(role);
-            }
-        } else {
-            switch (choice) {
-                case 1:
-                    product.displayProductList(role);
-                    displayMenu("Customer");
-                    break;
-                case 2:
-                    userID = getUserID(username);
-                    order.createOrder(userID);
-                    break;
-                case 3:
-                    billing.viewBilling(role);
-                    break;
-                case 4:
-                    welcomePage();
-                    break;
-                default:
-                    System.out.println("");
-                    System.out.println("\n╔══════════════════════════════════════════╗");
-                    System.out.println("║     Error Message: Invalid Selection     ║");
-                    System.out.println("╚══════════════════════════════════════════╝");
-                    System.out.println("Please try again ...\n");
-                    displayMenu(role);
-            }
+    public void processChoice(int choice) {
+    	
+        switch (choice) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                System.out.println("");
+                System.out.println("\n╔══════════════════════════════════════════╗");
+                System.out.println("║     Error Message: Invalid Selection     ║");
+                System.out.println("╚══════════════════════════════════════════╝");
+                System.out.println("Please try again ...\n");
+                displayMenu(role);
         }
+
     }
 
     // Establish connection
