@@ -8,7 +8,10 @@ public class User {
 	String name;
 	String member_type;
 	Boolean excl_reward;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 669692a30d5c3ada256451866991c55e18576fe3
 	private int userID;
     private String username;
     private String phoneNum;
