@@ -5,13 +5,14 @@ import java.sql.*;
 
 public class User{
 	private final Scanner scanner =new Scanner(System.in);
-	private Connection connection;
+	//private Connection connection;
 	private AppManager app=new AppManager();
     private String username;
     private String phoneNum;
     private String password;
     private String email;
     private String fullName;
+    
     
 public void signUpPhase(Connection connection) {
 

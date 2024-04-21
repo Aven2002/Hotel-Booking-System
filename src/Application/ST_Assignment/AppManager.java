@@ -19,8 +19,6 @@ public class AppManager {
     
 
     public void welcomePage() {
-        boolean validInput = false;
-        while (!validInput) {
             System.out.println("\n@===================================@");
             System.out.println("| Welcome to Hotel Booking System   |");
             System.out.println("|===================================|");
@@ -34,7 +32,7 @@ public class AppManager {
             	User user=new User();
                 System.out.print("Enter your choice: ");
                 choice = scanner.nextInt();
-                scanner.nextLine();
+               // scanner.nextLine();
                 switch (choice) {
                     case 1:
                         user.loginPhase(connection);
@@ -43,12 +41,12 @@ public class AppManager {
                         user.signUpPhase(connection);
                         break;
                     case 3:
-                        displayMenu();
+                     //   displayMenu();
                         break;
                     case 4:
                     	goodbyeMessage();
-                        break;
-                    default:
+                    	return;
+				default:
                         System.out.println("\n==========================================");
                         System.out.println("     Error Message: Invalid Selection     ");
                         System.out.println("==========================================");
@@ -62,11 +60,8 @@ public class AppManager {
                 scanner.nextLine();
             }
         }
-    }
-
 
     public void goodbyeMessage() {
-
         System.out.println("\n===============================");
         System.out.println("                               ");
         System.out.println("   Goodbye! Have a nice day!   ");
@@ -74,7 +69,8 @@ public class AppManager {
         System.out.println("===============================");
     }
 
-    // Menu
+
+   /* // Menu
     public void displayMenu() {
             System.out.println("\n@=============================@");
             System.out.println("|         Main Menu           |");
@@ -116,7 +112,7 @@ public class AppManager {
                     //wait_list.getWaiting();
                     break;
                 case 4:
-                    welcomePage();
+                   // welcomePage();
                     break;
                 default:
                     System.out.println("");
@@ -136,5 +132,5 @@ public class AppManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
