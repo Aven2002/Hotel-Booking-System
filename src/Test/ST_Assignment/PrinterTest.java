@@ -16,7 +16,7 @@ public class PrinterTest {
 	
 	@Test
 	public void testPrintInfo() {
-		//Printer printerMock = new Printer();
+		//by using the @Mock above and @RunWith(MockitoJUnitRunner.class)
 
 		// Define test data
         String name = "John Doe";
@@ -29,6 +29,23 @@ public class PrinterTest {
         // Verify that the printInfo method was called with the correct arguments
         verify(printerMock).printInfo(name, memberType, roomType);
 
+	}
+	
+	@Test
+	public void testPrintInfoV2() {
+		// Define test data
+        String name = "John Doe";
+        String memberType = "member";
+        String roomType = "Standard";
+        
+        Printer mock = mock(Printer.class);
+        
+        // Call the method under test on the Mock object
+        mock.printInfo(name, memberType, roomType);
+        
+        // Verify that the printInfo method was called 
+        // on the mock with the correct arguments
+        verify(mock).printInfo(name, memberType, roomType);
 	}
 }
 
