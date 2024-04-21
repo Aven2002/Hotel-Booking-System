@@ -13,3 +13,15 @@ public class Printer {
 
 	}
 }
+
+//public static void printInfo(String name, String member_type, String room_type) {
+//StringBuilder sb = new StringBuilder();
+//sb.append("\n==============================================\n");
+//sb.append("                   Result                     \n");
+//sb.append("==============================================\n");
+//sb.append("        Name          : ").append(name).append("\n");
+//sb.append("        Member Type   : ").append(member_type).append("\n");
+//sb.append("        Room Type     : ").append(room_type).append("\n");
+//sb.append("\n==============================================\n");
+//System.out.println(sb.toString());
+//}
