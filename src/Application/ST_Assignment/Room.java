@@ -52,17 +52,17 @@ public class Room {
         }
     }
 
-    public static void main(String[] args) {
-        // Initialize database connection
-        try {
-            Connection connection = dbConnector.getConnection();
-            Room room = new Room(connection);
-            room.displayAvailableRooms("VIP");
-            // Close the connection when done
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        // Initialize database connection
+//        try {
+//            Connection connection = dbConnector.getConnection();
+//            Room room = new Room(connection);
+//            room.displayAvailableRooms("VIP");
+//            // Close the connection when done
+//            connection.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

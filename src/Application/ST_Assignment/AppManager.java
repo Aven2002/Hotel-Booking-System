@@ -46,7 +46,7 @@ public class AppManager {
                     case 4:
                     	goodbyeMessage();
                     	return;
-				default:
+                    default:
                         System.out.println("\n==========================================");
                         System.out.println("     Error Message: Invalid Selection     ");
                         System.out.println("==========================================");
@@ -70,7 +70,7 @@ public class AppManager {
     }
 
 
-   /* // Menu
+    // Menu
     public void displayMenu() {
             System.out.println("\n@=============================@");
             System.out.println("|         Main Menu           |");
@@ -132,5 +132,5 @@ public class AppManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
