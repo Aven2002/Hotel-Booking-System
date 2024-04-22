@@ -69,7 +69,11 @@ public class AppManager {
         System.out.println("===============================");
     }
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 365616d49473175c3cacb4a7c9796aba36e81444
     // Menu
     public void displayMenu() {
             System.out.println("\n@=============================@");
