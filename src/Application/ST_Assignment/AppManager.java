@@ -69,8 +69,8 @@ public class AppManager {
         System.out.println("===============================");
     }
 
-
-   /* // Menu
+    
+    // Menu
     public void displayMenu() {
             System.out.println("\n@=============================@");
             System.out.println("|         Main Menu           |");
@@ -132,5 +132,5 @@ public class AppManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
