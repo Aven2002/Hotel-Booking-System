@@ -88,7 +88,7 @@ public class AppManager {
         try {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            //scanner.nextLine();
             processChoice(choice);
         } catch (InputMismatchException e) {
             System.out.println("");
