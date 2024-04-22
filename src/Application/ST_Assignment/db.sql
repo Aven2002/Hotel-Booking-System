@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS user_account (
     username VARCHAR(45) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     memberLevel VARCHAR(50) NOT NULL,
+    exclusiveReward BOOLEAN NOT NULL DEFAULT FALSE, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (userID)
 );
@@ -52,5 +53,26 @@ CREATE TABLE IF NOT EXISTS bookingRoom (
     FOREIGN KEY (bookingID) REFERENCES booking(bookingID),
     FOREIGN KEY (roomID) REFERENCES room(roomID)
 );
+
+/*Pre- defined Room*/
+INSERT INTO room (roomType, roomPrice, roomStatus) VALUES
+('VIP', 800.00, 'Available'),
+('VIP', 800.00, 'Available'),
+('VIP', 800.00, 'Available'),
+('VIP', 800.00, 'Available'),
+('VIP', 800.00, 'Available'),
+('Deluxe', 500.00, 'Available'),
+('Deluxe', 500.00, 'Available'),
+('Deluxe', 500.00, 'Available'),
+('Deluxe', 500.00, 'Available'),
+('Deluxe', 500.00, 'Available'),
+('Standard', 300.00, 'Available'),
+('Standard', 300.00, 'Available'),
+('Standard', 300.00, 'Available'),
+('Standard', 300.00, 'Available'),
+('Standard', 300.00, 'Available')
+
+
+
 
 
